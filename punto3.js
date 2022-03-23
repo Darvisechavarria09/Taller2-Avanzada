@@ -1,14 +1,27 @@
-//falta terminar
-let alimentos =[
-    {nombre:"cucaracha",tipo:"insecto",niveldeEnergia:200},
-    {nombre:"tomate",tipo:"vegetal",niveldeEnergia:100},
-    {nombre:"vaca",tipo:"animal",niveldeEnergia:300},
-    {nombre:"lechuga",tipo:"vegetal",niveldeEnergia:300},
-    {nombre:"zanahoria",tipo:"vegetal",niveldeEnergia:300},
-    {nombre:"mosca",tipo:"insecto",niveldeEnergia:150},
-    {nombre:"lagarto",tipo:"animal",niveldeEnergia:300},
-    {nombre:"banano",tipo:"vegetal",niveldeEnergia:400}
-]
+let nombres=['cucaracha','tomate','araña','vaca','lechuga','zanahoria','mosca','lagarto','caballo']
+let tipos=['insecto','vegetal','animal']
+
+let alimentos=[]
+for(let i=0; i < 50; i++)
+{
+    let alimento={}
+
+    alimento.nombre=nombres[Math.floor(Math.random()*nombres.length)]
+    if(alimento.nombre=='cucaracha' || alimento.nombre=='araña' || alimento.nombre=='mosca'){
+        alimento.tipo='insecto'
+    }
+    else if(alimento.nombre=='vaca' || alimento.nombre=='lagarto' || alimento.nombre=='caballo'){
+        alimento.tipo='animal'
+    }
+    else{
+        alimento.tipo='vegetal'
+    }
+
+    alimento.niveldeEnergia=Math.floor(Math.random()*500)
+    alimentos.push(alimento)
+}
+
+
 function recibirAlimentos(alimentos,callback){
     setTimeout(function(){        
         let alimentosFiltrados = alimentos.filter(function(alimento){
@@ -22,5 +35,5 @@ function recibirAlimentos(alimentos,callback){
 recibirAlimentos(alimentos,function(alimentosFiltrados){
     let sumaNiveles = alimentosFiltrados.map(alimento => alimento.niveldeEnergia).reduce((prev, curr) => prev + curr, 0)
     console.log(alimentosFiltrados)
-    console.log("la suma de niveles de los vegetales de nivel mayor a 200 es: " + sumaNiveles)
+    console.log("la suma de niveles de energia de los vegetales, de nivel mayor a 200 es: " + sumaNiveles)
 })
